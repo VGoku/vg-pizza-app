@@ -7,6 +7,8 @@ import {
 import Layout from './components/Layout'
 import Home from './components/Home'
 import Menu from './components/Menu'
+import About from './components/About'
+import Contact from './components/Contact'
 import NotFound from './components/NotFound'
 import LoadingSpinner from './components/LoadingSpinner'
 
@@ -29,6 +31,22 @@ const routes = [
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <Menu />
+          </Suspense>
+        )
+      },
+      {
+        path: 'about',
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <About />
+          </Suspense>
+        )
+      },
+      {
+        path: 'contact',
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Contact />
           </Suspense>
         )
       },
