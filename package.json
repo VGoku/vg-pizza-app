@@ -1,0 +1,32 @@
+{
+  "name": "vg-pizza-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:backend": "npm run dev --workspace=backend",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.0",
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "rimraf": "^5.0.5"
+  },
+  "resolutions": {
+    "glob": "^10.0.0",
+    "rimraf": "^5.0.5"
+  },
+  "overrides": {
+    "glob": "^10.3.10",
+    "rimraf": "^5.0.5",
+    "superagent": "^9.0.1"
+  }
+}
