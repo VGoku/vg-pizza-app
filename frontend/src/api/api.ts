@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Use the same IP address that the frontend is running on
-const API_BASE_URL = 'http://192.168.4.46:3000/api';
+// Use relative URL which will work with Vite's proxy configuration
+const API_BASE_URL = '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -52,4 +52,4 @@ export const checkHealth = async () => {
   }
 };
 
-export default api; 
+export default api;
