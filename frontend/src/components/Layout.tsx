@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { FaPizzaSlice, FaHome, FaUtensils, FaInfoCircle, FaEnvelope } from 'react-icons/fa';
 
 const Layout: React.FC = () => {
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isActive = (path: string) => {
     return location.pathname === path;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-red-100">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-red-600 to-red-700 shadow-lg">
+    <div className="min-h-screen">
+      {/* Header - Fixed Position */}
+      <header className="fixed top-0 left-0 right-0 bg-gradient-to-r from-red-600 to-red-700 shadow-lg z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link to="/" className="flex items-center">
@@ -69,7 +70,10 @@ const Layout: React.FC = () => {
             </nav>
 
             {/* Mobile Navigation Button */}
-            <button className="md:hidden text-white">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden text-white"
+            >
               <svg
                 className="h-6 w-6"
                 fill="none"
@@ -85,16 +89,72 @@ const Layout: React.FC = () => {
               </svg>
             </button>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden py-4">
+              <div className="flex flex-col space-y-2">
+                <Link
+                  to="/"
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive('/')
+                      ? 'bg-white text-red-600'
+                      : 'text-white hover:bg-white/20'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FaHome className="mr-2" />
+                  Home
+                </Link>
+                <Link
+                  to="/menu"
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive('/menu')
+                      ? 'bg-white text-red-600'
+                      : 'text-white hover:bg-white/20'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FaUtensils className="mr-2" />
+                  Menu
+                </Link>
+                <Link
+                  to="/about"
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive('/about')
+                      ? 'bg-white text-red-600'
+                      : 'text-white hover:bg-white/20'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FaInfoCircle className="mr-2" />
+                  About
+                </Link>
+                <Link
+                  to="/contact"
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive('/contact')
+                      ? 'bg-white text-red-600'
+                      : 'text-white hover:bg-white/20'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FaEnvelope className="mr-2" />
+                  Contact
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
-      {/* Main Content */}
-      <main>
+      {/* Main Content - With Padding for Fixed Header */}
+      <main className="pt-20">
         <Outlet />
       </main>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-red-600 to-red-700 text-white py-8">
+      <footer className="bg-gradient-to-r from-red-600 to-red-700 text-white py-8 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -146,4 +206,4 @@ const Layout: React.FC = () => {
   );
 };
 
-export default Layout; 
+export default Layout;

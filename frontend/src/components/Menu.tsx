@@ -59,58 +59,72 @@ const Menu: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-red-100 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-4">
-            <FaPizzaSlice className="text-5xl text-red-500 mr-4 animate-bounce" />
-            <h1 className="text-5xl font-bold text-gray-900">
-              Our Menu
-            </h1>
-          </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover our delicious selection of handcrafted pizzas
-          </p>
+    <div className="min-h-screen relative">
+      {/* Background Image Grid */}
+      <div className="fixed inset-0">
+        <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
+          <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f" alt="" className="w-full h-full object-cover rounded-xl" />
+          <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707" alt="" className="w-full h-full object-cover rounded-xl" />
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" alt="" className="w-full h-full object-cover rounded-xl hidden md:block" />
+          <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e" alt="" className="w-full h-full object-cover rounded-xl hidden md:block" />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-red-50/80 to-red-100/80" />
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {pizzas.map((pizza) => (
-            <div
-              key={pizza.id}
-              className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
-            >
-              <div className="relative">
-                <img
-                  src={pizza.image}
-                  alt={pizza.name}
-                  className="w-full h-64 object-cover"
-                />
-                {pizza.popular && (
-                  <div className="absolute top-4 right-4 bg-yellow-400 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
-                    <FaStar className="mr-1" />
-                    Popular
+      {/* Content */}
+      <div className="relative z-10 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-4">
+              <FaPizzaSlice className="text-5xl text-red-500 mr-4 animate-bounce" />
+              <h1 className="text-5xl font-bold text-gray-900">
+                Our Menu
+              </h1>
+            </div>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Discover our delicious selection of handcrafted pizzas
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {pizzas.map((pizza) => (
+              <div
+                key={pizza.id}
+                className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+              >
+                <div className="relative">
+                  <img
+                    src={pizza.image}
+                    alt={pizza.name}
+                    className="w-full h-64 object-cover"
+                  />
+                  {pizza.popular && (
+                    <div className="absolute top-4 right-4 bg-yellow-400 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                      <FaStar className="mr-1" />
+                      Popular
+                    </div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{pizza.name}</h3>
+                  <p className="text-gray-600 mb-4">{pizza.description}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-2xl font-bold text-red-500">${pizza.price}</span>
+                    <button 
+                      onClick={() => handleAddToCart(pizza)}
+                      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center"
+                    >
+                      <FaShoppingCart className="mr-2" />
+                      Add to Cart
+                    </button>
                   </div>
-                )}
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{pizza.name}</h3>
-                <p className="text-gray-600 mb-4">{pizza.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-red-500">${pizza.price}</span>
-                  <button 
-                    onClick={() => handleAddToCart(pizza)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center"
-                  >
-                    <FaShoppingCart className="mr-2" />
-                    Add to Cart
-                  </button>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+        <Cart />
       </div>
-      <Cart />
     </div>
   );
 };
