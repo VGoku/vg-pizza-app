@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { FaPizzaSlice, FaHome, FaUtensils, FaInfoCircle, FaEnvelope } from 'react-icons/fa';
+import ScrollToTop from './ScrollToTop';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -12,6 +13,7 @@ const Layout: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+      <ScrollToTop />
       {/* Header - Fixed Position */}
       <header className="fixed top-0 left-0 right-0 bg-gradient-to-r from-red-600 to-red-700 shadow-lg z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
