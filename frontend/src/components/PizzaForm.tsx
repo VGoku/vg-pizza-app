@@ -34,17 +34,22 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
 
   return (
     <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl">
-      <div className="bg-gradient-to-r from-red-500 to-red-600 p-6">
+      <div className="bg-gradient-to-r from-red-500 to-red-600 p-8">
         <div className="flex items-center justify-center">
-          <FaPizzaSlice className="text-4xl text-white mr-3" />
-          <h2 className="text-2xl font-bold text-white">Order Your Pizza</h2>
+          <FaPizzaSlice className="text-5xl text-white mr-4 animate-bounce" />
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Create Your Pizza
+          </h2>
         </div>
+        <p className="text-white/80 text-center mt-2">
+          Customize your perfect pizza
+        </p>
       </div>
 
-      <div className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="p-6 md:p-8">
+        <form onSubmit={handleSubmit} className="space-y-8">
           <div className="relative">
-            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="fullName" className="block text-base font-semibold text-gray-700 mb-2">
               Full Name
             </label>
             <div className="relative">
@@ -55,7 +60,7 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
                 data-testid="fullNameInput"
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="pl-10 w-full rounded-lg border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 transition duration-200"
+                className="pl-10 w-full rounded-lg border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 transition duration-200 text-lg"
                 required
                 minLength={3}
                 maxLength={20}
@@ -64,8 +69,8 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
             </div>
           </div>
 
-          <div className="relative">
-            <label htmlFor="size" className="block text-sm font-medium text-gray-700 mb-1">
+          <div>
+            <label htmlFor="size" className="block text-base font-semibold text-gray-700 mb-2">
               Pizza Size
             </label>
             <div className="relative">
@@ -74,7 +79,7 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
                 data-testid="sizeSelect"
                 value={formData.size}
                 onChange={(e) => setFormData({ ...formData, size: e.target.value })}
-                className="appearance-none w-full rounded-lg border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 transition duration-200 pr-10"
+                className="appearance-none w-full rounded-lg border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 transition duration-200 pr-10 text-lg"
               >
                 <option value="S">Small (10")</option>
                 <option value="M">Medium (12")</option>
@@ -85,10 +90,10 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Toppings
+            <label className="block text-base font-semibold text-gray-700 mb-3">
+              Select Your Toppings
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 { id: '1', name: 'Pepperoni' },
                 { id: '2', name: 'Green Peppers' },
@@ -98,7 +103,7 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
               ].map((topping) => (
                 <label
                   key={topping.id}
-                  className={`flex items-center p-3 rounded-lg border-2 transition-all duration-200 cursor-pointer ${
+                  className={`flex items-center p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer ${
                     formData.toppings.includes(topping.id)
                       ? 'border-red-500 bg-red-50'
                       : 'border-gray-200 hover:border-red-300'
@@ -111,14 +116,14 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
                     onChange={() => handleToppingChange(topping.id)}
                     className="hidden"
                   />
-                  <span className="flex-1 text-gray-700">{topping.name}</span>
-                  <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                  <span className="flex-1 text-lg font-medium">{topping.name}</span>
+                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
                     formData.toppings.includes(topping.id)
                       ? 'bg-red-500 border-red-500'
                       : 'border-gray-300'
                   }`}>
                     {formData.toppings.includes(topping.id) && (
-                      <FaCheck className="text-white text-xs" />
+                      <FaCheck className="text-white text-sm" />
                     )}
                   </div>
                 </label>
@@ -127,8 +132,8 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
           </div>
 
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-500 p-4 flex items-center">
-              <FaTimes className="text-red-500 mr-3" />
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg flex items-center">
+              <FaTimes className="text-red-500 mr-3 flex-shrink-0" />
               <p className="text-red-700">{error}</p>
             </div>
           )}
@@ -137,7 +142,7 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
             type="submit"
             data-testid="submit"
             disabled={isLoading}
-            className={`w-full py-3 px-4 rounded-lg text-white font-medium transition-all duration-200 transform hover:scale-[1.02] ${
+            className={`w-full py-4 px-6 rounded-xl text-white font-bold text-lg transition-all duration-200 transform hover:scale-[1.02] ${
               isLoading
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
@@ -164,4 +169,4 @@ const PizzaForm: React.FC<PizzaFormProps> = ({ onSubmit, isLoading, error }) => 
   );
 };
 
-export default PizzaForm; 
+export default PizzaForm;

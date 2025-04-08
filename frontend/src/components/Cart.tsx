@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import { FaShoppingCart, FaTrash, FaMinus, FaPlus } from 'react-icons/fa';
 import { useCartStore } from '../store/cartStore';
+import { useOrderStore } from '../store/orderStore';
 
 const Cart: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const { items, removeItem, updateQuantity, clearCart, getTotal } = useCartStore();
+  const { addOrder } = useOrderStore();
 
   const handlePlaceOrder = () => {
     if (items.length === 0) return;
     
-    // Here you would typically make an API call to place the order
-    // For now, we'll just simulate it
+    // Group all items into a single order
+    addOrder({
+      fullName: "Menu Order",
+      size: "M", // Default size for menu orders
+      toppings: [], // No custom toppings for menu orders
+      items: items.map(item => ({
+        id: item.id,
+        name: item.name,
+        quantity: item.quantity
+      }))
+    });
+
     setOrderPlaced(true);
     clearCart();
     setTimeout(() => {
