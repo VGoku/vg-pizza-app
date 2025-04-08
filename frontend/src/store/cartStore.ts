@@ -1,11 +1,5 @@
 import { create } from 'zustand';
-
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
+import { CartItem } from '@/types';
 
 interface CartStore {
   items: CartItem[];
