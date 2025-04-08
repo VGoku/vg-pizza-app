@@ -10,7 +10,11 @@
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "npm run dev --workspace=frontend",
     "dev:backend": "npm run dev --workspace=backend",
-    "build": "npm run build --workspaces",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "npm run build --workspace=frontend",
+    "build:backend": "npm run build --workspace=backend",
+    "vercel-build": "npm run build",
+    "start": "npm run start --workspace=backend",
     "test": "npm run test --workspaces"
   },
   "devDependencies": {
@@ -36,5 +40,8 @@
     "glob": "^10.3.10",
     "rimraf": "^5.0.5",
     "superagent": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
