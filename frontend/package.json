@@ -13,6 +13,8 @@
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
     "@tanstack/react-query": "^5.22.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "axios": "^1.6.7",
     "glob": "^11.0.1",
     "react": "^18.2.0",
